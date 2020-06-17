@@ -1,54 +1,33 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
+import 'antd/dist/antd.css';
+import { Input , Button , List } from 'antd';
+
+const data = [
+  'Racing car sprays burning fuel into crowd.',
+  'Japanese princess to wed commoner.',
+  'Australian walks 100km after outback crash.',
+  'Man charged over missing wedding girl.',
+  'Los Angeles battles huge wildfires.',
+];
 
 class Todolist extends Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            inputValue:'',
-            list: ['study english', 'learning react','学习语文']
-        }
-    }
-
     render(){       
         return (
-            <Fragment>
-                <div> <input onChange = {this.handleinputValue.bind(this)}
-                             value = {this.state.inputValue} />
-                    <button onClick = {this.handleclick.bind(this)}>提交</button>
-                </div>
-                <ul>
-                    {
-                        this.state.list.map((item,index) => 
-                        <li onClick = {this.removeitemclick.bind(this,index)}
-                            key={index}>{item}</li>)
-                    }
-                </ul>
-            </Fragment>
+           <div>
+               <div style={{marginTop:20}}>
+                    <Input placeholder='todo info' style={{width:320,height:35,marginRight:6,marginLeft:10}}/>
+                    <Button type="primary" style={{height:35,width:66}}>按钮</Button>
+               </div>
+               <div style={{marginTop:10}}>
+                    <List
+                        style={{width:393,marginLeft:10}}
+                        bordered
+                        dataSource={data}
+                        renderItem={item => (<List.Item>{item}</List.Item>)}
+                    />
+               </div>
+           </div>
         )
     }
-
-    handleinputValue(e){
-        this.setState({
-            inputValue: e.target.value
-        })     
-    }
-
-    handleclick(){
-        this.setState({
-            list:[...this.state.list , this.state.inputValue],
-            inputValue:''
-        })
-    }
-
-    removeitemclick(index){
-        //immutable
-        //state 不允许我们做任何的修改  会对性能优化产生问题  所以不直接this.state.list.splice
-        const list = [...this.state.list]
-        list.splice(index,1)
-        this.setState({
-            list: list
-        })
-    }
 }
-
 export default Todolist;
