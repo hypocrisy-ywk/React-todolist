@@ -7,7 +7,8 @@ import store from './store';
 import {
     getInputChangeAction,
     getBtnClickAction,
-    getDeleteListAction
+    getDeleteListAction,
+    getTodoList
 } from './store/actionCreators.js'
 
 
@@ -47,6 +48,11 @@ class Todolist extends Component{
                </div>
            </div>
         )
+    }
+
+    componentDidMount() {
+        const action = getTodoList()
+        store.dispatch(action)
     }
 
     inputValueChange(e) {

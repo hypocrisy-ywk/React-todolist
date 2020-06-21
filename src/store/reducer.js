@@ -4,6 +4,11 @@ const defaultState = {
 }
 
 export default ( state = defaultState , action ) => {
+    if(action.type === 'init_list_action') {
+         const newState = JSON.parse(JSON.stringify(state));
+         newState.list = action.data;
+         return newState
+    }
     if(action.type === 'input_value_change'){
         const newState = JSON.parse(JSON.stringify(state));
         newState.inputValue = action.value;
